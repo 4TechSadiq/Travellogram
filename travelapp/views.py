@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from firebase_admin import credentials, db, storage
 import firebase_admin
+from django.core.files.storage import default_storage
 
 # Create your views here.
 
@@ -28,6 +29,18 @@ firebase_admin.initialize_app(cred,{
 
 
 
+def upload_image(image):
+    image_path = default_storage.save(image.name, image)
+    bucket = storage.bucket()
+    blob = bucket.blob(f"images/{image.name}")
+    blob.upload_from_filename(image_path)
+    blob.make_public()
+    image_url = blob.public_url
+    default_storage.dele(image_path)
+
+    return image_url
+
+
 
 def index(request):
     if request.method == "POST":
@@ -38,6 +51,16 @@ def index(request):
         weather = request.POST.get("weather")
         activity = request.POST.get("activity")
         location = request.POST.get("location")
+
+        # image_path = default_storage.save(image.name, image)
+        # bucket = storage.bucket()
+        # blob = bucket.blob(f"images/{image.name}")
+        # blob.upload_from_filename(image_path)
+        # blob.make_public()
+        # image_url = blob.public_url
+        # default_storage.dele(image_path)
+        
+        image_url = upload_image(image)
 
         print(place_name, image, country, state, weather, activity, location)
 
