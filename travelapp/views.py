@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from firebase_admin import credentials, db
+from firebase_admin import credentials, db, storage
 import firebase_admin
 
 # Create your views here.
@@ -22,7 +22,8 @@ config = {
 
 cred = credentials.Certificate(config)
 firebase_admin.initialize_app(cred,{
-    "databaseURL": "https://travellogram-2a80c-default-rtdb.firebaseio.com/"
+    "databaseURL": "https://travellogram-2a80c-default-rtdb.firebaseio.com/",
+    'storageBucket': 'gs://travellogram-2a80c.appspot.com'
 })
 
 
