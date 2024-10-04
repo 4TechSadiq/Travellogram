@@ -1,1 +1,5 @@
 *.pyc
+db.sqlite3
+travelproject/__pycache__/settings.cpython-311.pyc
+sdq21.jpg
+media/images/download_1.png
