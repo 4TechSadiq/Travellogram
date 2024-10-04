@@ -48,7 +48,7 @@ def index(request):
     print(data)
 
 
-    return render(request,"index.html")
+    return render(request,"index.html",context={"data":data})
 
 def my_view(request):
     # Reading data from Firebase Realtime Database
