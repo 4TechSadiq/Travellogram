@@ -151,9 +151,9 @@
         <div class="card-body">
           <h5 class="card-title">{{destination.place_name}}</h5>
           <p class="card-text">{{destination.activity}}</p>
-          <a href="% url 'detail' destination.id %" class="btn btn-primary">Go somewhere</a>
+          <a href="{% url 'moreinfo' destination.id %}" class="btn btn-primary">Go somewhere</a>
         </div>
-    </div>
+      </div>
         
       {% endfor %}
       

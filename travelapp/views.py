@@ -50,6 +50,9 @@ def index(request):
 
     return render(request,"index.html",context={"data":data})
 
+def moreinfo(request):
+    return render(request,"moreinfo.html")
+
 def my_view(request):
     # Reading data from Firebase Realtime Database
     ref = db.reference('user')
