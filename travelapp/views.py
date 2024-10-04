@@ -7,6 +7,7 @@ from .serializers import GetForm
 from .models import DestinationData
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
+import requests
 # Create your views here.
 
 
@@ -40,6 +41,12 @@ def index(request):
         weather = request.POST.get("weather")
         activity = request.POST.get("activity")
         location = request.POST.get("location")
+
+    api_url = "http://127.0.0.1:8000/view-destination/"
+    response = requests.get(api_url)
+    data = response.json()
+    print(data)
+
 
     return render(request,"index.html")
 
