@@ -11,23 +11,37 @@ from rest_framework.permissions import AllowAny
 
 
 
-class GetData(generics.ListCreateAPIView):
+class CreateDestination(generics.ListCreateAPIView):
     serializer_class = GetForm
     queryset = DestinationData.objects.all()
     permission_classes = [AllowAny]
 
 
-# def index(request):
-#     if request.method == "POST":
-#         place_name = request.POST.get("place_name")
-#         image = request.FILES.get("image")
-#         country = request.POST.get("country")
-#         state = request.POST.get("state")
-#         weather = request.POST.get("weather")
-#         activity = request.POST.get("activity")
-#         location = request.POST.get("location")
+class ViewDestination(generics.ListAPIView):
+    serializer_class = GetForm
+    queryset = DestinationData.objects.all()
 
-#     return render(request,"index.html")
+class UpdateDestination(generics.RetrieveUpdateAPIView):
+    serializer_class = GetForm
+    queryset = DestinationData.objects.all()
+    permission_classes = [AllowAny]
+
+
+class DeleteDestination(generics.DestroyAPIView):
+    serializer_class = GetForm
+    queryset = DestinationData.objects.all()
+
+def index(request):
+    if request.method == "POST":
+        place_name = request.POST.get("place_name")
+        image = request.FILES.get("image")
+        country = request.POST.get("country")
+        state = request.POST.get("state")
+        weather = request.POST.get("weather")
+        activity = request.POST.get("activity")
+        location = request.POST.get("location")
+
+    return render(request,"index.html")
 
 def my_view(request):
     # Reading data from Firebase Realtime Database
