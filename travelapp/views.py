@@ -64,8 +64,9 @@ def index(request):
 
     return render(request,"index.html",context={"data":response_data})
 
-def moreinfo(request,place):
-    return render(request,"moreinfo.html")
+def moreinfo(request,dest_id):
+    data = DestinationData.objects.get(dest_id)
+    return render(request,"moreinfo.html", context={"data":data})
 
 def destinations(request):
     list_api = "http://127.0.0.1:8000/view-destination/"
