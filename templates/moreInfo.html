@@ -31,73 +31,74 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-sm-collapse">
-        <div class="container col-4">
-            <div class="container">
-                <h2 class="navbar-bramd">Travellogram</h2>
-            </div>
+  <nav class="navbar navbar-expand-lg navbar-sm-collapse">
+    <div class="container col-4">
+        <div class="container">
+            <h2 class="navbar-bramd">Travellogram</h2>
         </div>
-        <div class="container ">
-            <ul type="none" class="g-5 d-flex justify-content-around">
-                <li>
-                    <div class="container p-2 ">
-                        <h6><a href="" class="text-dark" style="text-decoration: none;">Home</a></h6>
-                    </div>
-                </li>
-                <li>
-                    <div class="container p-2">
-                      <h6><a href="" class="text-dark" style="text-decoration: none;">Destination</a></h6>
-                    </div>
-                </li>
-                <li>
-                    <div class="container p-2">
-                      <h6><a href="" class="text-dark" style="text-decoration: none;">Guides</a></h6>
-                    </div>
-                </li>
-                <li>
-                    <div class="container p-2">
-                      <h6><a href="" class="text-dark" style="text-decoration: none;">About Us</a></h6>
-                    </div>
-                </li>
-                <li>
-                    <div class="container p-2">
-                      <h6><a href="" class="text-dark" style="text-decoration: none;">Contact Us</a></h6>
-                    </div>
-                </li>
-            </ul>
+    </div>
+    <div class="container ">
+        <ul type="none" class="g-5 d-flex justify-content-around">
+            <li>
+                <div class="container p-2 ">
+                    <h6><a href="{% url 'index' %}" class="text-dark" style="text-decoration: none;">Home</a></h6>
+                </div>
+            </li>
+            <li>
+                <div class="container p-2">
+                  <h6><a href="{% url 'destinations' %}" class="text-dark" style="text-decoration: none;">Destination</a></h6>
+                </div>
+            </li>
+            <li>
+                <div class="container p-2">
+                  <h6><a href="" class="text-dark" style="text-decoration: none;">Guides</a></h6>
+                </div>
+            </li>
+            <li>
+                <div class="container p-2">
+                  <h6><a href="{% url 'about' %}" class="text-dark" style="text-decoration: none;">About Us</a></h6>
+                </div>
+            </li>
+            <li>
+                <div class="container p-2">
+                  <h6><a href="{% url 'contact' %}" class="text-dark" style="text-decoration: none;">Contact Us</a></h6>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="container col-4">
+        <div class="container d-flex justify-content-end">
+          <h6><a href="" class="text-dark" style="text-decoration: none;">Login/SignUp</a></h6>
         </div>
-        <div class="container col-4">
-            <div class="container d-flex justify-content-end">
-              <h6><a href="" class="text-dark" style="text-decoration: none;">Login/SignUp</a></h6>
-            </div>
-        </div>
-    </nav>
+    </div>
+</nav>
     <div class="container-fluid">
         <div class="row">
             <div class="container">
                 <h2 class="text-center"> Explore Destinations</h2>
             </div>
         </div>
-       
+
+       {% if data %}
         <div class="row">
             <div class="container d-flex flex-wrap">
                 <div class="col-lg-6 col-sm-10 p-5">
                     <div class="container d-flex justify-content-center">
-                        <img src="a-3d-render-of-a-globe-with-various-travel-destina-GrNQv3NpTlGcJJDgFUhcqA-48TxFwkuQDS021YZu35GLQ.jpeg" class=""  alt="" srcset="">
+                        <img src="{{data.picture}}" class=""  alt="no image found" srcset="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-10 p-5">
                     <div class="container">
                         <div class="container">
-                            <h2>Eranakulam</h2>
+                            <h2>{{data.place_name}}</h2>
                         </div>
                         <div class="container mt-4">
                             <h5>Description</h5>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum quae magni ullam inventore perferendis, maxime cupiditate et quasi tempore labore porro eos iusto consectetur. Odio ipsum itaque vitae rem expedita?</p>
+                            <p>{{data.description}}</p>
                         </div>
                         <div class="container mt-4">
                             <h5>Famous Activity</h5>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum quae magni ullam inventore perferendis, maxime cupiditate et quasi tempore labore porro eos iusto consectetur. Odio ipsum itaque vitae rem expedita?</p>
+                            <p>{{data.activity}}</p>
                         </div>
                     </div>
                 </div>
@@ -108,7 +109,7 @@
           <div class="col-6">
             <div class="container">
                 <div class="col-lg-6 col-sm-10 mt-4">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4988.595591697423!2d76.07706805530036!3d11.04613872538278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba64a9d0a699333%3A0x2b9921a0c7462335!2sKottakunnu%20Park!5e1!3m2!1sen!2sin!4v1728192696923!5m2!1sen!2sin"  height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe src="{{data.location}}"  height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
           </div>
@@ -119,15 +120,15 @@
                 </div>
                 <div class="container mt-4">
                     <h5>Weather</h5>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum quae magni ullam inventore perferendis, maxime cupiditate et quasi tempore labore porro eos iusto consectetur. Odio ipsum itaque vitae rem expedita?</p>
+                    <p>{{data.weather}}</p>
                 </div>
                 <div class="container mt-4">
                     <h5>Country</h5>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum quae magni ullam inventore perferendis, maxime cupiditate et quasi tempore labore porro eos iusto consectetur. Odio ipsum itaque vitae rem expedita?</p>
+                    <p>{{data.country}}</p>
                 </div>
                 <div class="container mt-4">
-                  <h5>State, District</h5>
-                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum quae magni ullam inventore perferendis, maxime cupiditate et quasi tempore labore porro eos iusto consectetur. Odio ipsum itaque vitae rem expedita?</p>
+                  <h5>State</h5>
+                  <p>State: {{data.state}}</p>
               </div>
             </div>
         </div>
@@ -143,7 +144,7 @@
           </div>
         </div>
         
-
+        {% endif %}
 
     </div>
 

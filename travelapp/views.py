@@ -33,6 +33,10 @@ class DeleteDestination(generics.DestroyAPIView):
     serializer_class = GetForm
     queryset = DestinationData.objects.all()
 
+class RetriveDestination(generics.RetrieveAPIView):
+    queryset = DestinationData.objects.all()
+    serializer_class = GetForm
+
 def index(request):
     if request.method == "POST":
         place_name = request.POST.get("place_name")
@@ -53,19 +57,24 @@ def index(request):
             "activity": activity,
             "location": location
         }
+        print(create_data)
         response1 = requests.post(create_api, data=create_data, files={"picture": image})
         print(response1.status_code)
 
     list_api = "http://127.0.0.1:8000/view-destination/"
     response = requests.get(list_api)
     response_data = response.json()
-    print(response_data)
+    #print(response_data)
 
 
     return render(request,"index.html",context={"data":response_data})
 
 def moreinfo(request,dest_id):
-    data = DestinationData.objects.get(dest_id)
+    list_api = f"http://127.0.0.1:8000/retrive/{dest_id}/"
+    response = requests.get(list_api)
+    response_data = response.json()
+    data = response_data
+    print(data)
     return render(request,"moreinfo.html", context={"data":data})
 
 def destinations(request):
