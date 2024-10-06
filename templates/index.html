@@ -26,12 +26,12 @@
             <ul type="none" class="g-5 d-flex justify-content-around">
                 <li>
                     <div class="container p-2 ">
-                        <h6><a href="" class="text-dark" style="text-decoration: none;">Home</a></h6>
+                        <h6><a href="{% url 'index' %}" class="text-dark" style="text-decoration: none;">Home</a></h6>
                     </div>
                 </li>
                 <li>
                     <div class="container p-2">
-                      <h6><a href="" class="text-dark" style="text-decoration: none;">Destination</a></h6>
+                      <h6><a href="{% url 'destinations' %}" class="text-dark" style="text-decoration: none;">Destination</a></h6>
                     </div>
                 </li>
                 <li>
@@ -41,12 +41,12 @@
                 </li>
                 <li>
                     <div class="container p-2">
-                      <h6><a href="" class="text-dark" style="text-decoration: none;">About Us</a></h6>
+                      <h6><a href="{% url 'about' %}" class="text-dark" style="text-decoration: none;">About Us</a></h6>
                     </div>
                 </li>
                 <li>
                     <div class="container p-2">
-                      <h6><a href="" class="text-dark" style="text-decoration: none;">Contact Us</a></h6>
+                      <h6><a href="{% url 'contact' %}" class="text-dark" style="text-decoration: none;">Contact Us</a></h6>
                     </div>
                 </li>
             </ul>
@@ -100,8 +100,20 @@
         <div class="container">
             <div class="container d-flex flex-wrap">
                 <div class="col-lg-6 p-4">
-                    <h2>Who are we</h2>
-                    <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae iure sapiente cupiditate voluptatibus recusandae debitis fugit nobis. Nihil rerum odit ipsam adipisci, quo dignissimos hic dolore voluptates? Odit, ducimus ut! . Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga amet alias necessitatibus culpa aliquam non laboriosam modi ipsam deserunt, ipsa, nam distinctio quisquam voluptates omnis exercitationem minima? Ab, eos laboriosam?</p>
+                    <div class="container">
+                      <h2>Who are we</h2>
+                    </div>
+                    <div class="container">
+                      <p class="mt-3">
+                        Welcome to Travellogram, your ultimate community-driven travel hub! We are a platform where travelers from around the world come together to share their favorite destinations, experiences, and insights. Our website gathers information directly from passionate explorers like you, allowing everyone to contribute to a growing collection of unique locations.
+                      </p>
+                    </div>
+                    <div class="container">
+                      <p>From the name of the place, stunning photos, and famous activities to weather updates and hidden gems, Travellogram helps you discover destinations through the eyes of fellow adventurers. Whether you're planning your next trip or simply dreaming about new places to explore, we've got the inspiration and real-time data to guide your journey.</p>
+                    </div>
+                    <div class="container">
+                      <p><b>Join us in building the world's most dynamic travel guide, powered by the community for the community!</b></p>
+                    </div>
                 </div>
                 <div class="col-lg-6 p-4 ">
                     <div class="container col-lg-10">
@@ -144,20 +156,7 @@
         </div>
     </div>
 
-    {% if data %}
-      {% for destination in data %}
-      <div class="card" style="width: 18rem;">
-        <img src="{{destination.picture}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{destination.place_name}}</h5>
-          <p class="card-text">{{destination.activity}}</p>
-          <a href="{% url 'moreinfo' destination.id %}" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-        
-      {% endfor %}
-      
-    {% endif %}
+
     <div class="row mt-5">
         <div class="container">
             <div class="container">
@@ -165,30 +164,20 @@
             </div>
             <div class="container">
                 <div class="container d-flex justify-content-evenly flex-wrap mt-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{% static 'images/card1.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
+                  {% if data %}
+                    {% for destination in data|slice:":3" %}
+                    <div class="card mt-5" style="width: 18rem;">
+                      <img src="{{destination.picture}}" class="card-img-top" style="height: 200px;" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{destination.place_name}}</h5>
+                        <p class="card-text">{{destination.description}}</p>
+                        <a href="{% url 'moreinfo' destination.id %}" class="btn btn-primary">Go somewhere</a>
+                      </div>
                     </div>
-                      <div class="card" style="width: 18rem;">
-                        <img src="{% static 'images/who.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                      </div>
-                      <div class="card" style="width: 18rem;">
-                        <img src="{% static 'images/card3.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                      </div>
+                    {% endfor %}
+                    
+                  {% endif %}
+     
                 </div>
                 <div class="container mt-5">
                     <h4 class="text-large text-center"><a href="" >See More</a></h4>
@@ -314,8 +303,8 @@
                             <input type="text" name="place_name" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Picture</label>
-                            <input type="file" name="image" class="form-control">
+                          <label for="" class="form-label">Description</label>
+                          <input type="text" name="description" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Country</label>
@@ -336,6 +325,10 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Google Map Location <span class="text-danger">(Link)</span></label>
                             <input type="text" name="location" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                          <label for="" class="form-label">Picture</label>
+                          <input type="file" name="image" class="form-control">
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-primary" type="submit">Submit</button>
