@@ -10,6 +10,7 @@ from rest_framework.permissions import AllowAny
 import requests
 from django.contrib import messages
 from .mail import send_mail
+from .imageUrl import get_url
 # Create your views here.
 
 
@@ -49,8 +50,12 @@ def index(request):
         activity = request.POST.get("activity")
         location = request.POST.get("location")
         create_api = "http://127.0.0.1:8000/create-destination/"
+
+        image_url = get_url(image)
+        print("image_url:------------------",image_url)
         create_data = {
             "place_name": place_name,
+            "picture": image_url,
             "description": description,
             "country": country,
             "state": state,
@@ -59,7 +64,7 @@ def index(request):
             "location": location
         }
         print(create_data)
-        response1 = requests.post(create_api, data=create_data, files={"picture": image})
+        response1 = requests.post(create_api, data=create_data)
         print(response1.status_code)
 
     list_api = "http://127.0.0.1:8000/view-destination/"
@@ -81,8 +86,11 @@ def moreinfo(request,dest_id):
         location = request.POST.get("location")
         picture = request.FILES.get("picture")
 
+        image_url = get_url(picture)
+
         new_data = {
             "place_name": place_name,
+            "picture": image_url,
             "description": description,
             "country": country,
             "state": state,
@@ -90,21 +98,24 @@ def moreinfo(request,dest_id):
             "activity": activity,
             "location": location
         }
+
+        print(new_data)
         
         update_url = f"http://127.0.0.1:8000/update-destination/{dest_id}/"
-        response = requests.put(update_url, data=new_data, files={"picture": picture})
+        response = requests.put(update_url, data=new_data)
         print("status_code:---------------:",response.status_code)
         if response.status_code == 200:
-            messages.success(request,"recipe updated successfully")
+            print("updated successfully")
             return redirect(f"http://127.0.0.1:8000/moreinfo/{dest_id}")
         else:
+            print("cannot update")
             messages.error(request, f"error submitting data to rest_api, {response.status_code}")
     
     list_api = f"http://127.0.0.1:8000/retrive/{dest_id}/"
     response = requests.get(list_api)
     response_data = response.json()
     data = response_data
-    print(data)
+    #print(data)
     return render(request,"moreinfo.html", context={"data":data})
 
 def destinations(request):

@@ -64,7 +64,7 @@
     </div>
   </nav>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mt-5">
             <div class="container">
                 <h2 class="text-center"> Explore Destinations</h2>
                 <p class="text-danger">{{messages.message}}</p>
@@ -74,12 +74,12 @@
        {% if data %}
         <div class="row">
             <div class="container d-flex flex-wrap">
-                <div class="col-lg-6 col-sm-10 ">
+                <div class="col-lg-6 col-sm-10 p-3">
                     <div class="container d-flex justify-content-center">
                         <img src="{{data.picture}}" class=""  alt="no image found" srcset="">
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-10 p-5">
+                <div class="col-lg-6 col-sm-10 p-3">
                     <div class="container">
                         <div class="container">
                             <h2>{{data.place_name}}</h2>
@@ -175,7 +175,7 @@
                             {% csrf_token %}
                             <div class="mb-3">
                               <label for="placename" class="form-label">Place Name</label>
-                              <input type="text" class="form-control" aria-describedby="emailHelp">
+                              <input type="text" name="place_name" class="form-control" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
                               <label for="exampleInputPassword1" class="form-label">Description</label>
@@ -203,15 +203,15 @@
                             </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Picture</label>
-                              <input type="file" name="image" class="form-control">
+                              <input type="file" name="picture" class="form-control">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                          </form>
+                            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
+                      </form>
                       </div>
                     </div>
                   </div>
