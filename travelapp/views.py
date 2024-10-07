@@ -99,7 +99,7 @@ def moreinfo(request,dest_id):
             "location": location
         }
 
-        print(new_data)
+        #print(new_data)
         
         update_url = f"http://127.0.0.1:8000/update-destination/{dest_id}/"
         response = requests.put(update_url, data=new_data)
@@ -122,7 +122,7 @@ def destinations(request):
     list_api = "http://127.0.0.1:8000/view-destination/"
     response = requests.get(list_api)
     response_data = response.json()
-    print(response_data)
+    #print(response_data)
 
     return render(request,"places.html",context={"data":response_data})
 
