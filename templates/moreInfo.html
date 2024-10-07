@@ -128,10 +128,11 @@
             <div class="col-6 d-flex justify-content-around mt-5">
                 <div class="container">
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Delete Destination
-                  </button>
+                  </button> -->
 
+                  <a class="btn btn-danger" href="{% url 'delete-dest' data.id %}">Delete</a>
                   <!-- Modal -->
                   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -300,4 +301,5 @@
         </footer> 
     
 </body>
+
 </html>

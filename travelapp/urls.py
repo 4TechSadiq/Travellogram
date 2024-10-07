@@ -12,4 +12,5 @@ urlpatterns = [
     path("view-destination/", views.ViewDestination.as_view(), name="view-destination"),
     path("update-destination/<str:pk>/", views.UpdateDestination.as_view(), name="update-destination"),
     path("delete-destination/<str:pk>/", views.DeleteDestination.as_view(), name="delete-destination"),
+    path("delete/<str:id>", views.DeleteDest,name="delete-dest")
 ]

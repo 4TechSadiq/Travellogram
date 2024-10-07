@@ -99,16 +99,6 @@ def moreinfo(request,dest_id):
             return redirect(f"http://127.0.0.1:8000/moreinfo/{dest_id}")
         else:
             messages.error(request, f"error submitting data to rest_api, {response.status_code}")
-    # Handle DELETE request to delete a destination
-    elif request.method == "DELETE":
-        delete_url = f"http://127.0.0.1:8000/delete-destination/{dest_id}/"
-        response = requests.delete(delete_url)
-        print("status_code (delete):---------------:", response.status_code)
-        if response.status_code == 204:
-            messages.success(request, "Destination deleted successfully")
-            return redirect("destinations")  # Redirect to home page after deletion
-        else:
-            messages.error(request, f"Error deleting destination, {response.status_code}")
     
     list_api = f"http://127.0.0.1:8000/retrive/{dest_id}/"
     response = requests.get(list_api)
@@ -145,3 +135,11 @@ def Contactus(request):
         message = request.POST.get("message")
         send_mail(mail=email,name=name,msg=message)
     return render(request,"contactUs.html")
+
+def DeleteDest(request,id):
+    print("print id________________________", id)
+    dest_id = request.POST.get("dest_id")
+    delete_url = f"http://127.0.0.1:8000/delete-destination/{id}/"
+    response = requests.delete(delete_url)
+    print(response.status_code)
+    return redirect("destinations")
