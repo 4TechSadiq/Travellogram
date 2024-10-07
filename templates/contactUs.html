@@ -38,34 +38,21 @@
             <h2 class="navbar-bramd">Travellogram</h2>
         </div>
     </div>
-    <div class="container ">
-        <ul type="none" class="g-5 d-flex justify-content-around">
-            <li>
-                <div class="container p-2 ">
-                    <h6><a href="{% url 'index' %}" class="text-dark" style="text-decoration: none;">Home</a></h6>
-                </div>
-            </li>
-            <li>
-                <div class="container p-2">
-                  <h6><a href="{% url 'destinations' %}" class="text-dark" style="text-decoration: none;">Destination</a></h6>
-                </div>
-            </li>
-            <li>
-                <div class="container p-2">
-                  <h6><a href="" class="text-dark" style="text-decoration: none;">Guides</a></h6>
-                </div>
-            </li>
-            <li>
-                <div class="container p-2">
-                  <h6><a href="{% url 'about' %}" class="text-dark" style="text-decoration: none;">About Us</a></h6>
-                </div>
-            </li>
-            <li>
-                <div class="container p-2">
-                  <h6><a href="{% url 'contact' %}" class="text-dark" style="text-decoration: none;">Contact Us</a></h6>
-                </div>
-            </li>
-        </ul>
+    <div class="container d-flex justify-content-center">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link text-dark active" aria-current="page" href="{% url 'index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'destinations' %}">Destinations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'about' %}">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'contact' %}" class="nav-link text-dark" aria-disabled="true">Contact Us</a>
+        </li>
+      </ul>
     </div>
     <div class="container col-4">
         <div class="container d-flex justify-content-end">

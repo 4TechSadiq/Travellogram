@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from firebase_admin import credentials, db, storage
 import firebase_admin
@@ -8,6 +8,7 @@ from .models import DestinationData
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 import requests
+from django.contrib import messages
 from .mail import send_mail
 # Create your views here.
 
@@ -70,6 +71,45 @@ def index(request):
     return render(request,"index.html",context={"data":response_data})
 
 def moreinfo(request,dest_id):
+    if request.method == "POST":
+        place_name = request.POST.get("place_name")
+        description = request.POST.get("description")
+        country = request.POST.get("country")
+        state = request.POST.get("state")
+        weather = request.POST.get("weather")
+        activity = request.POST.get("activity")
+        location = request.POST.get("location")
+        picture = request.FILES.get("picture")
+
+        new_data = {
+            "place_name": place_name,
+            "description": description,
+            "country": country,
+            "state": state,
+            "weather": weather,
+            "activity": activity,
+            "location": location
+        }
+        
+        update_url = f"http://127.0.0.1:8000/update-destination/{dest_id}/"
+        response = requests.put(update_url, data=new_data, files={"picture": picture})
+        print("status_code:---------------:",response.status_code)
+        if response.status_code == 200:
+            messages.success(request,"recipe updated successfully")
+            return redirect(f"http://127.0.0.1:8000/moreinfo/{dest_id}")
+        else:
+            messages.error(request, f"error submitting data to rest_api, {response.status_code}")
+    # Handle DELETE request to delete a destination
+    elif request.method == "DELETE":
+        delete_url = f"http://127.0.0.1:8000/delete-destination/{dest_id}/"
+        response = requests.delete(delete_url)
+        print("status_code (delete):---------------:", response.status_code)
+        if response.status_code == 204:
+            messages.success(request, "Destination deleted successfully")
+            return redirect("destinations")  # Redirect to home page after deletion
+        else:
+            messages.error(request, f"Error deleting destination, {response.status_code}")
+    
     list_api = f"http://127.0.0.1:8000/retrive/{dest_id}/"
     response = requests.get(list_api)
     response_data = response.json()
