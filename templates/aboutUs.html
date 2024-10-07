@@ -32,36 +32,40 @@
     </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-sm-collapse">
-    <div class="container col-4">
-        <div class="container">
-            <h2 class="navbar-bramd">Travellogram</h2>
-        </div>
-    </div>
-    <div class="container d-flex justify-content-center">
-      <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link text-dark active" aria-current="page" href="{% url 'index' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="{% url 'destinations' %}">Destinations</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="{% url 'about' %}">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url 'contact' %}" class="nav-link text-dark" aria-disabled="true">Contact Us</a>
-        </li>
-      </ul>
-    </div>
-    <div class="container col-4">
-        <div class="container d-flex justify-content-end">
-          <h6><a href="" class="text-dark" style="text-decoration: none;">Login/SignUp</a></h6>
-        </div>
-    </div>
-</nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <div class="row">
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="#">Travellogram</a>
+  
+      <!-- Toggler/collapsible Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar links (collapsed content) -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link text-dark active" aria-current="page" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="{% url 'destinations' %}">Destinations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="{% url 'about' %}">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="{% url 'contact' %}">Contact Us</a>
+          </li>
+        </ul>
+        <div class="d-flex justify-content-end">
+          <a href="#" class="text-dark" style="text-decoration: none;">Login/SignUp</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <div class="container-fluid">
+        <div class="row mt-5">
             <div class="container">
                 <h2 class="text-center">About Us</h2>
             </div>
@@ -69,12 +73,12 @@
        
         <div class="row mt-5">
             <div class="container d-flex flex-wrap">
-                <div class="col-lg-6 col-sm-10 ">
+                <div class="col-lg-6 col-sm-10 p-3">
                     <div class="container d-flex justify-content-center">
                         <img src="{% static 'images/t1.jpeg' %}" class=""  alt="" srcset="">
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-10 p-5">
+                <div class="col-lg-6 col-sm-10 p-3">
                     <div class="container">
                       <div class="container">
                         <h2>Who are we</h2>
